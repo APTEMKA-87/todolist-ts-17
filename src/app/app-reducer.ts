@@ -19,8 +19,8 @@ const slice = createSlice({
         setAppStatusAC: (state, action: PayloadAction<{ status: RequestStatusType }>) => {
             state.status = action.payload.status
         },
-        setAppInitializedAC: (state, action: PayloadAction<{ value: boolean }>) => {
-            state.isInitialized = action.payload.value
+        setAppInitializedAC: (state, action: PayloadAction<{ isInitialized: boolean }>) => {
+            state.isInitialized = action.payload.isInitialized
         },
     }
 })
@@ -49,8 +49,7 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
         } else {
 
         }
-
-        dispatch(setAppInitializedAC({value: true}));
+        dispatch(setAppInitializedAC({isInitialized: true}));
     })
 }
 
