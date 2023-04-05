@@ -40,7 +40,12 @@ function App({demo = false}: PropsType) {
 
     if (!isInitialized) {
         return <div
-            style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            style={{
+                position: 'fixed',
+                top: '30%',
+                textAlign: 'center',
+                width: '100%'
+            }}>
             <CircularProgress/>
         </div>
     }
@@ -51,18 +56,22 @@ function App({demo = false}: PropsType) {
                 <ErrorSnackbar/>
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton edge="start" color="inherit" aria-label="menu">
+                        <IconButton edge="start" color="inherit"
+                                    aria-label="menu">
                             <Menu/>
                         </IconButton>
                         <Typography variant="h6">
                             News
                         </Typography>
-                        {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
+                        {isLoggedIn &&
+                            <Button color="inherit" onClick={logoutHandler}>Log
+                                out</Button>}
                     </Toolbar>
                     {status === 'loading' && <LinearProgress/>}
                 </AppBar>
                 <Container fixed>
-                    <Route exact path={'/'} render={() => <TodolistsList demo={demo}/>}/>
+                    <Route exact path={'/'}
+                           render={() => <TodolistsList demo={demo}/>}/>
                     <Route path={'/login'} render={() => <Login/>}/>
                 </Container>
             </div>
