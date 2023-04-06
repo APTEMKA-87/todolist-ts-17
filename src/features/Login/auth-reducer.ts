@@ -7,6 +7,8 @@ import {
 
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Dispatch} from "redux";
+import {clearTodolist} from "../TodolistsList/todolists-reducer";
+import {clearTasks} from "../TodolistsList/tasks-reducer";
 
 const initialState: { isLoggedIn: boolean } = {
     isLoggedIn: false
@@ -47,6 +49,8 @@ export const logoutTC = () => (dispatch: Dispatch) => {
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC({value: false}))
+                dispatch(clearTasks())
+                dispatch(clearTodolist())
                 dispatch(setAppStatusAC({status: 'succeeded'}))
             } else {
                 handleServerAppError(res.data, dispatch)

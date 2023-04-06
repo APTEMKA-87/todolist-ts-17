@@ -46,6 +46,9 @@ const slice = createSlice({
                 filter: 'all',
                 entityStatus: 'idle'
             }))
+        },
+        clearTodolist() {
+            return []
         }
     }
 })
@@ -57,7 +60,8 @@ export const {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
-    changeTodolistEntityStatusAC
+    changeTodolistEntityStatusAC,
+    clearTodolist
 } = slice.actions
 
 // thunks
