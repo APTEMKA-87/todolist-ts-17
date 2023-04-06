@@ -18,6 +18,8 @@ import {
     handleServerNetworkError
 } from '../../utils/error-utils'
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {clearTasksTodolists} from "../../common/actions/common.actions";
+import {loginTC, logoutTC} from "../Login/auth-reducer";
 
 const initialState: TasksStateType = {}
 
@@ -45,9 +47,6 @@ const slice = createSlice({
         setTasksAC(state, action: PayloadAction<{ tasks: Array<TaskType>, todolistId: string }>) {
             state[action.payload.todolistId] = action.payload.tasks
         },
-        clearTasks() {
-            return {}
-        }
     },
     extraReducers: (builder) => {
         builder.addCase(addTodolistAC, (state, action) => {
@@ -60,13 +59,19 @@ const slice = createSlice({
             action.payload.todolists.forEach((tl: any) => {
                 state[tl.id] = []
             })
+        });
+        // builder.addCase(logoutTC.,(state) => {
+        //
+        // })
+        builder.addCase(clearTasksTodolists.type, (state, action) => {
+            return {}
         })
     }
 
 })
 
 export const tasksReducer = slice.reducer
-export const {removeTaskAC, setTasksAC, addTaskAC, updateTaskAC, clearTasks} = slice.actions
+export const {removeTaskAC, setTasksAC, addTaskAC, updateTaskAC} = slice.actions
 
 // thunks
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
