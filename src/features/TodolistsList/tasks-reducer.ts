@@ -19,7 +19,6 @@ import {
 } from '../../utils/error-utils'
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {clearTasksTodolists} from "../../common/actions/common.actions";
-import {loginTC, logoutTC} from "../Login/auth-reducer";
 
 const initialState: TasksStateType = {}
 
@@ -60,11 +59,8 @@ const slice = createSlice({
                 state[tl.id] = []
             })
         });
-        // builder.addCase(logoutTC.,(state) => {
-        //
-        // })
-        builder.addCase(clearTasksTodolists.type, (state, action) => {
-            return {}
+        builder.addCase(clearTasksTodolists, (state, action) => {
+            return action.payload.tasks
         })
     }
 

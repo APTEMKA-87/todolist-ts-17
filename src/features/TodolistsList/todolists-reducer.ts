@@ -1,11 +1,6 @@
 import {todolistsAPI, TodolistType} from '../../api/todolists-api'
 import {Dispatch} from 'redux'
-import {
-    RequestStatusType,
-    SetAppErrorActionType,
-    setAppStatusAC,
-    SetAppStatusActionType
-} from '../../app/app-reducer'
+import {RequestStatusType, setAppStatusAC} from '../../app/app-reducer'
 import {handleServerNetworkError} from '../../utils/error-utils'
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {clearTasksTodolists} from "../../common/actions/common.actions";
@@ -50,8 +45,8 @@ const slice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(clearTasksTodolists.type, (state, action) => {
-            return []
+        builder.addCase(clearTasksTodolists, (state, action) => {
+            return action.payload.todolists
         })
     }
 })
@@ -116,14 +111,9 @@ export const changeTodolistTitleTC = (id: string, title: string) => {
     }
 }
 
-// types
-export type AddTodolistActionType = ReturnType<typeof addTodolistAC>;
-export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>;
-export type SetTodolistsActionType = ReturnType<typeof setTodolistsAC>;
-
 export type FilterValuesType = 'all' | 'active' | 'completed';
 export type TodolistDomainType = TodolistType & {
     filter: FilterValuesType
     entityStatus: RequestStatusType
 }
-type ThunkDispatch = Dispatch<SetAppStatusActionType | SetAppErrorActionType>
+

@@ -48,7 +48,7 @@ export const logoutTC = () => (dispatch: Dispatch) => {
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC({value: false}))
-                dispatch(clearTasksTodolists())
+                dispatch(clearTasksTodolists({tasks: {}, todolists: []}))
                 dispatch(setAppStatusAC({status: 'succeeded'}))
             } else {
                 handleServerAppError(res.data, dispatch)
