@@ -32,7 +32,7 @@ export const fetchTasksTC = createAsyncThunk('task/fetchTasks', async (todolistI
 
 export const removeTaskTC = createAsyncThunk('task/removeTask', (param: { taskId: string, todolistId: string }, thunkAPI) => {
     return todolistsAPI.deleteTask(param.todolistId, param.taskId)
-        .then(res => ({taskId: param.taskId, todolistId: param.todolistId}))
+        .then(res => ({taskId: param.taskId, todolistId: param.todolistId})) //ToDo что тут происходит?
 })
 
 const slice = createSlice({
