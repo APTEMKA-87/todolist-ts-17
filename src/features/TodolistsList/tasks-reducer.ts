@@ -1,7 +1,6 @@
 import {
-    addTodolistAC,
-    removeTodolistAC,
-    setTodolistsAC
+    addTodolistAC, fetchTodolistsTC,
+    removeTodolistAC
 } from './todolists-reducer'
 import {
     TaskPriorities,
@@ -104,7 +103,7 @@ const slice = createSlice({
         builder.addCase(removeTodolistAC, (state, action) => {
             delete state[action.payload.id]
         });
-        builder.addCase(setTodolistsAC, (state, action) => {
+        builder.addCase(fetchTodolistsTC.fulfilled, (state, action) => {
             action.payload.todolists.forEach((tl: any) => {
                 state[tl.id] = []
             })
