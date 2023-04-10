@@ -4,7 +4,7 @@ import {
     removeTaskTC,
     tasksReducer,
     TasksStateType,
-    updateTaskAC
+    updateTaskTC,
 } from './tasks-reducer'
 
 import {
@@ -111,19 +111,22 @@ test('correct task should be deleted from correct array', () => {
 test('correct task should be added to correct array', () => {
 
     const task = {
-            todoListId: "todolistId2",
-            title: "juce",
-            status: TaskStatuses.New,
-            addedDate: "",
-            deadline: "",
-            description: "",
-            order: 0,
-            priority: 0,
-            startDate: "",
-            id: "id exists"
-        };
+        todoListId: "todolistId2",
+        title: "juce",
+        status: TaskStatuses.New,
+        addedDate: "",
+        deadline: "",
+        description: "",
+        order: 0,
+        priority: 0,
+        startDate: "",
+        id: "id exists"
+    };
 
-    const action = addTaskTC.fulfilled(task, 'requestId', {title: task.title, todolistId: task.todoListId})
+    const action = addTaskTC.fulfilled(task, 'requestId', {
+        title: task.title,
+        todolistId: task.todoListId
+    })
 
     const endState = tasksReducer(startState, action)
 
@@ -134,11 +137,14 @@ test('correct task should be added to correct array', () => {
     expect(endState["todolistId2"][0].status).toBe(TaskStatuses.New);
 });
 test('status of specified task should be changed', () => {
-    const action = updateTaskAC({
+
+    let updateModel = {
         taskId: "2",
         model: {status: TaskStatuses.New},
         todolistId: "todolistId2"
-    });
+    }
+
+    const action = updateTaskTC.fulfilled(updateModel, 'requestId', updateModel);
 
     const endState = tasksReducer(startState, action)
 
@@ -146,11 +152,14 @@ test('status of specified task should be changed', () => {
     expect(endState["todolistId2"][1].status).toBe(TaskStatuses.New);
 });
 test('title of specified task should be changed', () => {
-    const action = updateTaskAC({
+
+    let updateModel = {
         taskId: "2",
         model: {title: "yogurt"},
         todolistId: "todolistId2"
-    });
+    }
+
+    const action = updateTaskTC.fulfilled(updateModel, 'requestId', updateModel);
 
     const endState = tasksReducer(startState, action)
 
